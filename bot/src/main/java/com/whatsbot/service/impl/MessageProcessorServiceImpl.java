@@ -1,6 +1,9 @@
 package com.whatsbot.service.impl;
 
 import com.whatsbot.dto.MessageDto;
+import com.whatsbot.intent.IntentType;
+import com.whatsbot.service.IntentClassifierService;
+import com.whatsbot.service.MessageAuditService;
 import com.whatsbot.service.MessageProcessorService;
 import com.whatsbot.service.MessageService;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +18,21 @@ public class MessageProcessorServiceImpl implements MessageProcessorService {
     private static final Logger log = LoggerFactory.getLogger(MessageProcessorServiceImpl.class);
 
     private final MessageService messageService;
+    private final IntentClassifierService intentClassifierService;
+    private final MessageAuditService messageAuditService;
 
     @Override
     public void processIncomingMessage(String sender, String message) {
+        long start = System.currentTimeMillis();
+        IntentType intent = intentClassifierService.classify(message);
+
         MessageDto dto = new MessageDto();
         dto.setText(message);
+        dto.setIntent(intent.name());
         MessageDto saved = messageService.save(dto);
+
+        long responseTime = System.currentTimeMillis() - start;
+        messageAuditService.log(saved.getId(), intent.name(), responseTime, true);
         log.info("Processed message from {} with saved id {}", sender, saved.getId());
     }
 }

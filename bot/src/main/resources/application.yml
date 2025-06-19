@@ -13,4 +13,10 @@ spring:
 
 logging:
   pattern:
-    console: '{"time":"%d{ISO8601}","level":"%p","thread":"%t","logger":"%c{1}","msg":"%m"}%n'
+    console: '{"time":"%d{ISO8601}","level":"%p","logger":"%c{1}","message":"%m"}%n'
+  file:
+    name: logs/whatsbot.log
+
+whatsapp:
+  phone-number-id: YOUR_PHONE_NUMBER_ID
+  access-token: YOUR_ACCESS_TOKEN
