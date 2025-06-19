@@ -1,6 +1,14 @@
 server:
   port: 8080
 
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: '{"time":"%d{ISO8601}","level":"%p","logger":"%c{1}","message":"%m"}%n'
+  file:
+    name: logs/whatsbot.log
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/whatsbot
@@ -11,6 +19,12 @@ spring:
       ddl-auto: update
     show-sql: false
 
-logging:
-  pattern:
-    console: '{"time":"%d{ISO8601}","level":"%p","thread":"%t","logger":"%c{1}","msg":"%m"}%n'
+whatsapp:
+  base-url: https://graph.facebook.com/v17.0
+  phone-number-id: YOUR_PHONE_NUMBER_ID
+  access-token: YOUR_ACCESS_TOKEN
+
+cors:
+  enabled: true
+  allowed-origins:
+    - "*"
