@@ -1,4 +1,4 @@
-package com.example.whatsapp.dto;
+package com.whatsbot.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

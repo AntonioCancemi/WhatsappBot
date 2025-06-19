@@ -1,6 +1,6 @@
-package com.example.whatsapp.service;
+package com.whatsbot.service;
 
-import com.example.whatsapp.dto.TemplateMessageRequest;
+import com.whatsbot.dto.TemplateMessageRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
