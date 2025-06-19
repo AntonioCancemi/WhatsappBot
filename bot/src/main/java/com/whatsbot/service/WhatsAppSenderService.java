@@ -1,11 +1,12 @@
 package com.whatsbot.service;
 
 import com.whatsbot.dto.TemplateMessageRequest;
+import com.whatsbot.config.WhatsAppProperties;
 import com.whatsbot.service.MessageAuditService;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,25 +15,16 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class WhatsAppSenderService {
     private static final Logger LOGGER = LoggerFactory.getLogger(WhatsAppSenderService.class);
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String token;
-    private final String phoneNumberId;
+    private final WhatsAppProperties properties;
     private final MessageAuditService messageAuditService;
 
-    public WhatsAppSenderService(
-            @Value("${whatsapp.access-token}") String token,
-            @Value("${whatsapp.phone-number-id}") String phoneNumberId,
-            MessageAuditService messageAuditService) {
-        this.token = token;
-        this.phoneNumberId = phoneNumberId;
-        this.messageAuditService = messageAuditService;
-    }
-
     public void sendTemplateMessage(UUID messageId, String phoneNumber, String templateName, String intent, Map<String, String> parameters) {
- 
-        String url = String.format("https://graph.facebook.com/v17.0/%s/messages", phoneNumberId);
+        String url = String.format("%s/%s/messages", properties.getBaseUrl(), properties.getPhoneNumberId());
+        headers.setBearerAuth(properties.getAccessToken());
         List<String> values = parameters.values().stream().toList();
         TemplateMessageRequest request = new TemplateMessageRequest(phoneNumber, templateName, values);
 
