@@ -14,3 +14,7 @@ spring:
 logging:
   pattern:
     console: '{"time":"%d{ISO8601}","level":"%p","thread":"%t","logger":"%c{1}","msg":"%m"}%n'
+
+whatsapp:
+  phone-number-id: YOUR_PHONE_NUMBER_ID
+  access-token: YOUR_ACCESS_TOKEN
