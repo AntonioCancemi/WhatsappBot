@@ -31,6 +31,7 @@ public class WhatsAppSenderService {
     }
 
     public void sendTemplateMessage(UUID messageId, String phoneNumber, String templateName, String intent, Map<String, String> parameters) {
+ 
         String url = String.format("https://graph.facebook.com/v17.0/%s/messages", phoneNumberId);
         List<String> values = parameters.values().stream().toList();
         TemplateMessageRequest request = new TemplateMessageRequest(phoneNumber, templateName, values);
@@ -46,6 +47,7 @@ public class WhatsAppSenderService {
             ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
             success = response.getStatusCode().is2xxSuccessful();
             if (success) {
+ 
                 LOGGER.info("WhatsApp message sent: {}", response.getBody());
             } else {
                 LOGGER.error("Failed to send WhatsApp message: {} - {}", response.getStatusCode(), response.getBody());
@@ -55,6 +57,7 @@ public class WhatsAppSenderService {
         } finally {
             long responseTime = System.currentTimeMillis() - start;
             messageAuditService.log(messageId, intent, responseTime, success);
+ 
         }
     }
 }
