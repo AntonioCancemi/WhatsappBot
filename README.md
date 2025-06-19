@@ -23,6 +23,7 @@ Costruito per essere **scalabile**, **estendibile** e **vendibile**, ma abbastan
 ## 📐 Struttura dei pacchetti
 
 src/main/java/com/whatsbot/
+
 ├── controller/ # API REST (webhook, template)
 ├── dto/ # DTO input/output
 ├── service/ # Business logic e NLP
