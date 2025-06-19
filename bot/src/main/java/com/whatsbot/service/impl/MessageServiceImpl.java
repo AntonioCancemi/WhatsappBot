@@ -25,6 +25,7 @@ public class MessageServiceImpl implements MessageService {
     public MessageDto save(MessageDto messageDto) {
         Message message = new Message();
         message.setText(messageDto.getText());
+        message.setIntent(messageDto.getIntent());
         message.setDirection(MessageDirection.IN);
         Message saved = messageRepository.save(message);
         log.info("Saved message with id {}", saved.getId());
@@ -39,6 +40,7 @@ public class MessageServiceImpl implements MessageService {
                     MessageDto dto = new MessageDto();
                     dto.setId(m.getId());
                     dto.setText(m.getText());
+                    dto.setIntent(m.getIntent());
                     return dto;
                 })
                 .collect(Collectors.toList());
