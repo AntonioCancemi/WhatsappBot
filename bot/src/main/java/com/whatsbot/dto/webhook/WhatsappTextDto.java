@@ -1,0 +1,10 @@
+package com.whatsbot.dto.webhook;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class WhatsappTextDto {
+    @NotBlank
+    private String body;
+}
