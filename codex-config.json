@@ -1,0 +1,18 @@
+{
+    "name": "whatsapp-ai-bot",
+    "language": "java",
+    "framework": "spring-boot",
+    "entryPoint": "src/main/java/com/whatsbot/WhatsAppBotApplication.java",
+    "context": {
+        "readme": "README.md",
+        "agent": "AGENTS.md"
+    },
+    "instructions": [
+        "Segui la struttura dei pacchetti indicata",
+        "Utilizza best practices Spring Boot",
+        "Non includere codice incompleto o non funzionante",
+        "Tutti i file devono essere modulari, testabili e documentati",
+        "Leggi i file context prima di generare"
+    ],
+    "version": "1.0.0"
+}
