@@ -28,3 +28,4 @@ cors:
   enabled: true
   allowed-origins:
     - "*"
+ 

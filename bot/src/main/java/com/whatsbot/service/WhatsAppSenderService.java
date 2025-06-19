@@ -24,6 +24,7 @@ public class WhatsAppSenderService {
 
     public void sendTemplateMessage(UUID messageId, String phoneNumber, String templateName, String intent, Map<String, String> parameters) {
         String url = String.format("%s/%s/messages", properties.getBaseUrl(), properties.getPhoneNumberId());
+ 
         List<String> values = parameters.values().stream().toList();
         TemplateMessageRequest request = new TemplateMessageRequest(phoneNumber, templateName, values);
 
@@ -38,6 +39,7 @@ public class WhatsAppSenderService {
             ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
             success = response.getStatusCode().is2xxSuccessful();
             if (success) {
+ 
                 LOGGER.info("WhatsApp message sent: {}", response.getBody());
             } else {
                 LOGGER.error("Failed to send WhatsApp message: {} - {}", response.getStatusCode(), response.getBody());
