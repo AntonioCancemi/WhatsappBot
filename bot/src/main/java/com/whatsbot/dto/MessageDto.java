@@ -11,4 +11,6 @@ public class MessageDto {
 
     @NotBlank
     private String text;
+
+    private String intent;
 }
