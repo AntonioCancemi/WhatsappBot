@@ -6,35 +6,34 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "messages")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+public class User {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(unique = true, nullable = false)
+    private String phone;
+
+    private String name;
 
     @Column(nullable = false)
-    private String text;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private MessageDirection direction;
+    private String language;
 
     @CreationTimestamp
-    private Instant timestamp;
+    private Instant createdAt;
 
-    private String intent;
+    @UpdateTimestamp
+    private Instant updatedAt;
 }
