@@ -6,8 +6,6 @@ Progetto backend in **Java 21 + Spring Boot 3.2+** per la creazione di un **bot 
 
 Costruito per essere **scalabile**, **estendibile** e **vendibile**, ma abbastanza semplice da essere sviluppato anche da un solo sviluppatore.
 
----
-
 ## 🧱 Stack Tecnologico
 
 - **Java 21**
@@ -18,21 +16,18 @@ Costruito per essere **scalabile**, **estendibile** e **vendibile**, ma abbastan
 - **SLF4J** (log JSON)
 - (Facoltativo) **React + Bootstrap** per dashboard
 
----
-
 ## 📐 Struttura dei pacchetti
 
+```
 src/main/java/com/whatsbot/
-
-├── controller/ # API REST (webhook, template)
-├── dto/ # DTO input/output
-├── service/ # Business logic e NLP
-├── repository/ # Spring Data JPA
-├── model/ # Entità JPA
-├── config/ # Configurazioni globali
+├── controller/         # API REST (webhook, template)
+├── dto/                # DTO input/output
+├── service/            # Business logic e NLP
+├── repository/         # Spring Data JPA
+├── model/              # Entità JPA
+├── config/             # Configurazioni globali
 └── WhatsAppBotApplication.java
-
----
+```
 
 ## 🔁 Flusso principale
 
@@ -45,8 +40,6 @@ src/main/java/com/whatsbot/
    - Invio template se previsto (`WhatsAppSenderService`)
 5. Tutto è tracciato in DB e log strutturati
 
----
-
 ## 📬 Endpoint chiave
 
 | Metodo | Endpoint            | Descrizione                        |
@@ -54,8 +47,6 @@ src/main/java/com/whatsbot/
 | POST   | /webhook/receive    | Riceve messaggi da WhatsApp Cloud |
 | POST   | /template/send      | Invia un template a un contatto   |
 | GET    | /message/history    | (Opzionale) Visualizza i log      |
-
----
 
 ## 🧠 NLP / Intent (MVP)
 
@@ -66,8 +57,6 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 - CANCEL → annullamenti
 - GENERIC → fallback
 
----
-
 ## 🗃️ Database Schema (base)
 
 | Tabella  | Campi principali                                        |
@@ -75,23 +64,17 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 | `users`  | id, phone, name, language, createdAt, updatedAt         |
 | `messages` | id, user_id, text, direction, intent, timestamp       |
 
----
-
 ## 🔐 Sicurezza
 
 - Header token per validazione Webhook
 - Variabili sensibili in `application.yml`
 - Nessun dato sensibile nei log
 
----
-
 ## 📦 Integrazione WhatsApp
 
 - Utilizza **WhatsApp Cloud API**
 - Invia solo **template approvati**
 - Webhook ricevuto su endpoint pubblico (es: Ngrok, VPS)
-
----
 
 ## 🧰 Esecuzione locale (dev)
 
@@ -101,8 +84,6 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 4. Espone `/webhook/receive` (via Ngrok o NGINX)
 5. Testa con Postman o direttamente con WhatsApp API
 
----
-
 ## 📈 Estensioni future
 
 - Multi-tenant support
@@ -110,8 +91,6 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 - Intent con AI dinamico
 - CRM integration
 - Drag & drop conversation builder
-
----
 
 ## ✨ Best Practices
 
@@ -122,10 +101,7 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 - Repository solo con Spring Data
 - Testabili facilmente con JUnit + Mockito
 
----
-
 ## 📣 Prompt per Codex / GPT
 
 > *Questo progetto segue naming e struttura standard Java + Spring Boot.*
 > *Quando completi classi o servizi, rispetta questi pacchetti: `controller`, `service`, `dto`, `repository`, `model`, `config`.*
-
