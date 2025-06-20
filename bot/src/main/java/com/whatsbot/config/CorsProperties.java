@@ -8,5 +8,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "cors")
 public class CorsProperties {
     private boolean enabled = false;
-    private List<String> allowedOrigins = List.of("*");
+    /**
+     * Explicitly allowed origins for CORS. Empty by default to avoid
+     * permissive configuration.
+     */
+    private List<String> allowedOrigins = List.of();
 }
