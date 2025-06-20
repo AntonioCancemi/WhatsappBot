@@ -24,6 +24,9 @@ whatsapp:
   phone-number-id: YOUR_PHONE_NUMBER_ID
   access-token: YOUR_ACCESS_TOKEN
 
+webhook:
+  token: CHANGE_ME
+
 cors:
   enabled: true
   allowed-origins:
