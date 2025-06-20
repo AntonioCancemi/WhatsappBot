@@ -18,7 +18,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class WhatsAppSenderService {
     private static final Logger LOGGER = LoggerFactory.getLogger(WhatsAppSenderService.class);
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
     private final WhatsAppProperties properties;
     private final MessageAuditService messageAuditService;
 
