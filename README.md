@@ -100,6 +100,14 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 - Nessuna logica hardcoded nei controller
 - Repository solo con Spring Data
 - Testabili facilmente con JUnit + Mockito
+## 🚀 Avvio con Docker Compose
+
+Esegui tutti i servizi tramite:
+
+```bash
+docker-compose up --build
+```
+
 
 ## 📣 Prompt per Codex / GPT
 
