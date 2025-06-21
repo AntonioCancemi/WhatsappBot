@@ -26,6 +26,7 @@ whatsapp:
 
 webhook:
   token: CHANGE_ME
+  twilio-auth-token: YOUR_TWILIO_AUTH_TOKEN
 
 cors:
   enabled: true
