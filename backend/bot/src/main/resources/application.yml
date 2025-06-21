@@ -36,3 +36,8 @@ cors:
   enabled: true
   allowed-origins:
     - "http://localhost:3000"
+
+info:
+  open-hours:
+    monday-friday: "9-18"
+    saturday: "10-14"
