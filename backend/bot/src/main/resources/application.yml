@@ -21,15 +21,12 @@ spring:
 
 whatsapp:
   base-url: https://graph.facebook.com/v17.0
-  phone-number-id: YOUR_PHONE_NUMBER_ID
-  access-token: YOUR_ACCESS_TOKEN
+  phone-number-id: +14155238886
 
 webhook:
-  token: CHANGE_ME
-  twilio-auth-token: YOUR_TWILIO_AUTH_TOKEN
-
+  token: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
+  twilio-auth-token: ShZjoEdha6VOawwcseZUqGoV9sYad4c8
 cors:
   enabled: true
   allowed-origins:
     - "http://localhost:3000"
- 

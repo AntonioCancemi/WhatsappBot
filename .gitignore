@@ -5,3 +5,5 @@ target/
 # Node / React
 node_modules/
 build/
+*.gz
+*.zip
