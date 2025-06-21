@@ -8,4 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class WebhookProperties {
     /** Token used to authorize incoming webhook requests */
     private String token;
+
+    /** Auth token used to validate Twilio webhook signatures */
+    private String twilioAuthToken;
 }
