@@ -26,6 +26,7 @@ whatsapp:
 webhook:
   token: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
   twilio-auth-token: ShZjoEdha6VOawwcseZUqGoV9sYad4c8
+
 cors:
   enabled: true
   allowed-origins:
