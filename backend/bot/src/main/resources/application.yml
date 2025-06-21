@@ -30,7 +30,10 @@ whatsapp:
 webhook:
   public-url: https://2e78-93-144-55-48.ngrok-free.app
   token: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
-  twilio-auth-token: ShZjoEdha6VOawwcseZUqGoV9sYad4c8
+
+twilio:
+  auth-token: ${TWILIO_AUTH_TOKEN}
+  webhook-url-override: https://your-ngrok.ngrok-free.app
 
 cors:
   enabled: true
