@@ -15,15 +15,20 @@ spring:
     username: postgres
     password: root
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
     show-sql: false
+    spring:
+
+
 
 whatsapp:
   base-url: https://graph.facebook.com/v17.0
   phone-number-id: +14155238886
 
 webhook:
+  public-url: https://2e78-93-144-55-48.ngrok-free.app
   token: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
   twilio-auth-token: ShZjoEdha6VOawwcseZUqGoV9sYad4c8
 

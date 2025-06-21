@@ -22,7 +22,7 @@ public class MessageProcessorServiceImpl implements MessageProcessorService {
     private final MessageAuditService messageAuditService;
 
     @Override
-    public void processIncomingMessage(String sender, String message) {
+    public void processIncomingMessage(String sender, String message, String sid) {
         long start = System.currentTimeMillis();
         IntentType intent = intentClassifierService.classify(message);
 
