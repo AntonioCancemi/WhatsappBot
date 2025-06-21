@@ -1,0 +1,17 @@
+flows:
+  - id: "faq"
+    steps:
+      - id: "start"
+        message: "Benvenuto! Come posso aiutarti?"
+        transitions:
+          GENERIC: "answer"
+      - id: "answer"
+        message: "Questa è una risposta predefinita."
+  - id: "booking"
+    steps:
+      - id: "start"
+        message: "Quando vuoi prenotare?"
+        transitions:
+          GENERIC: "confirm"
+      - id: "confirm"
+        message: "Prenotazione registrata."
