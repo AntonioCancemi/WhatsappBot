@@ -135,6 +135,17 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 - Nessuna logica hardcoded nei controller
 - Repository solo con Spring Data
 - Testabili facilmente con JUnit + Mockito
+
+## 🧹 Linting e Pre-commit
+
+Il frontend utilizza **ESLint** e **Prettier**. Dopo aver eseguito `npm install` nella cartella `frontend`, il comando `npm run prepare` inizializza Husky e attiva il hook `pre-commit`.
+
+Ad ogni commit vengono eseguiti:
+
+- `mvn spotless:apply` sul modulo `backend/bot`
+- `npm run lint` e `npm run format` sul frontend
+
+I file di configurazione sono in `frontend/.eslintrc.json` e `frontend/.prettierrc`.
 ## 🚀 Avvio con Docker Compose
 
 Esegui tutti i servizi tramite:
