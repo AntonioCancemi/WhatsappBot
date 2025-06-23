@@ -14,12 +14,15 @@ spring:
     url: jdbc:postgresql://postgres:5432/whatsapp_bot
     username: admin
     password: admin
+    driver-class-name: org.postgresql.Driver
+
   jpa:
-    open-in-view: false
     hibernate:
       ddl-auto: update
-    show-sql: false
-    spring:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
 
 whatsapp:
   base-url: https://graph.facebook.com/v17.0

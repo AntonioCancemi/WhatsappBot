@@ -1,0 +1,10 @@
+ curl -v -X POST http://localhost:8080/onboard/start   -H "Content-Type: application/json"   -d  '{
+    "tenantId":"0ede12c9-edb8-492c-a8e1-99e0f5ad4524"
+    }'
+
+ curl -v -X POST http://localhost:8080/onboard/start   -H "Content-Type: application/json"   -d '{
+    "baseUrl":      "https://graph.facebook.com/v17.0",
+    "phoneNumberId":"14155238886",
+    "accessToken":  "EAAGm0PX4ZCAbABABABABABABABABABABABABAB",
+    "appSecret":    "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6"
+  }'

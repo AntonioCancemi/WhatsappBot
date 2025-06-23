@@ -8,6 +8,7 @@ import com.whatsbot.service.OnboardingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,13 +25,21 @@ public class OnboardingController {
 
     private final OnboardingService onboardingService;
 
-    @PostMapping("/start")
+    @PostMapping(
+        path = "/start",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<OnboardStartResponse> start(@Valid @RequestBody OnboardStartRequest request) {
         OnboardStartResponse response = onboardingService.start(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PostMapping("/verify")
+    @PostMapping(
+        path = "/verify",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public ResponseEntity<OnboardVerifyResponse> verify(@Valid @RequestBody OnboardVerifyRequest request) {
         OnboardVerifyResponse response = onboardingService.verify(request);
         if (response.isVerified()) {

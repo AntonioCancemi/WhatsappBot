@@ -92,8 +92,9 @@ public class ConversationalFlowServiceImpl implements ConversationalFlowService 
         }
         stateRepository.save(state);
 
+        String finalNextStepId = nextStepId;
         FlowStep next = definition.getSteps().stream()
-                .filter(s -> s.getId().equals(nextStepId))
+                .filter(s -> s.getId().equals(finalNextStepId))
                 .findFirst()
                 .orElseThrow();
 
