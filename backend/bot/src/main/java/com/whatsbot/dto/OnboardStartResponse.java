@@ -3,8 +3,9 @@ package com.whatsbot.dto;
 import lombok.Data;
 
 /**
- * Response for onboarding start. Currently empty by design.
+ * Response returned after starting the onboarding flow.
  */
 @Data
 public class OnboardStartResponse {
+    private String tenantId;
 }
