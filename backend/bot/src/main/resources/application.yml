@@ -24,10 +24,11 @@ spring:
 whatsapp:
   base-url: https://graph.facebook.com/v17.0
   phone-number-id: +14155238886
+  access-token: change-me
   app-secret: change-me
 
 webhook:
-  token-ngrok: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
+  token: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
 
 
 cors:
