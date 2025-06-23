@@ -79,10 +79,13 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 ## 🧰 Esecuzione locale (dev)
 
 1. Clona il repo
-2. Configura PostgreSQL e `application.yml`
-3. Avvia con `mvn spring-boot:run`
-4. Espone `/webhook/receive` (via Ngrok o NGINX)
-5. Testa con Postman o direttamente con WhatsApp API
+2. Inserisci in `application.yml` i token di **WhatsApp Cloud API**
+3. Avvia i servizi con `docker-compose up --build`
+4. Esponi `/webhook/receive` (opzionale con Ngrok)
+5. Avvia lo stub di onboarding:
+   - `curl -X POST http://localhost:8080/onboard/start`
+   - `curl -X POST http://localhost:8080/onboard/verify`
+6. Testa l'invio messaggi tramite API WhatsApp
 
 ## 📈 Estensioni future
 
