@@ -16,3 +16,23 @@ export interface Message {
 export interface Template {
   name: string;
 }
+
+export interface OnboardStartRequest {
+  businessName: string;
+  phoneNumber: string;
+}
+
+export interface OnboardStartResponse {
+  tenantId: string;
+  token: string;
+}
+
+export interface OnboardVerifyRequest {
+  tenantId: string;
+  token: string;
+  code: string;
+}
+
+export interface OnboardVerifyResponse {
+  verified: boolean;
+}
