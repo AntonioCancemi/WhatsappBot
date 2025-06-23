@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+mvn -q -f backend/bot/pom.xml spotless:apply
+npm --prefix frontend run lint
+npm --prefix frontend run format
