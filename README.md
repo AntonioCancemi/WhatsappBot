@@ -156,6 +156,17 @@ docker-compose up --build
 
 Docker Compose leggerà le variabili definite nel tuo ambiente o nel file `.env`.
 
+## 🖥️ Sviluppo senza Docker
+
+Per eseguire il progetto localmente con database H2 in memoria utilizza:
+
+```bash
+./init-local.sh
+```
+
+Lo script compila il backend e avvia automaticamente sia il server che il frontend.
+
+
 
 ## 📣 Prompt per Codex / GPT
 

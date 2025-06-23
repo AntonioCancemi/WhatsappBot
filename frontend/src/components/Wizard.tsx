@@ -1,5 +1,6 @@
-import React from 'react';
-import useWizard from '../hooks/useWizard';
+import React, { FormEvent, useState } from 'react';
+import useOnboarding from '../hooks/useOnboarding';
+import { OnboardStartRequest } from '../types';
 
 interface Props {
   open: boolean;
@@ -7,98 +8,116 @@ interface Props {
 }
 
 export default function Wizard({ open, onClose }: Props) {
-  const { step, data, setData, next, prev, submitStart, submitVerify } = useWizard();
+  const { step, data, setData, next, prev, start, verify, token } = useOnboarding();
+  const [code, setCode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [completed, setCompleted] = useState(false);
 
   if (!open) return null;
 
-  const handleNext = async () => {
-    if (step === 1 && data.company) {
+  const handleStart = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await start(data as OnboardStartRequest);
       next();
-    } else if (step === 2 && data.phone) {
-      await submitStart();
-      next();
-    } else if (step === 3) {
-      next();
-    } else if (step === 4 && data.accepted) {
-      await submitVerify();
-      onClose();
+    } catch (err: any) {
+      if (err.code === 'ECONNABORTED') setError('Timeout');
+      else if (err.response?.status === 401) setError('Non autorizzato');
+      else setError('Errore');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const disabled =
-    (step === 1 && !data.company) || (step === 2 && !data.phone) || (step === 4 && !data.accepted);
+  const handleVerify = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await verify(code);
+      localStorage.setItem('authToken', token);
+      setCompleted(true);
+    } catch (err: any) {
+      if (err.code === 'ECONNABORTED') setError('Timeout');
+      else if (err.response?.status === 401) setError('Non autorizzato');
+      else setError('Errore');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (completed) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="bg-white rounded-lg p-6 w-full max-w-md text-center">Completato!</div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white rounded-lg p-6 w-full max-w-md">
-        <div className="mb-4 text-sm text-gray-500">Passo {step} di 4</div>
+        <div className="mb-4 text-sm text-gray-500">Passo {step} di 2</div>
+        {error && <div className="text-red-500 mb-2">{error}</div>}
         {step === 1 && (
-          <div className="space-y-4">
+          <form onSubmit={handleStart} className="space-y-4">
             <label className="block text-sm font-medium">
-              Azienda
+              Nome azienda
               <input
-                className="mt-1 w-full border rounded-md p-2"
-                value={data.company}
-                onChange={(e) => setData({ ...data, company: e.target.value })}
+                className="mt-1 w-full border rounded p-2"
+                value={data.businessName || ''}
+                onChange={(e) => setData({ ...data, businessName: e.target.value })}
                 required
               />
             </label>
-          </div>
+            <label className="block text-sm font-medium">
+              Numero di telefono
+              <input
+                className="mt-1 w-full border rounded p-2"
+                value={data.phoneNumber || ''}
+                onChange={(e) => setData({ ...data, phoneNumber: e.target.value })}
+                required
+              />
+            </label>
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded"
+                disabled={loading}
+              >
+                {loading ? 'Attendere...' : 'Avanti'}
+              </button>
+            </div>
+          </form>
         )}
         {step === 2 && (
-          <div className="space-y-4">
+          <form onSubmit={handleVerify} className="space-y-4">
             <label className="block text-sm font-medium">
-              Numero WhatsApp
+              Codice SMS
               <input
-                className="mt-1 w-full border rounded-md p-2"
-                value={data.phone}
-                onChange={(e) => setData({ ...data, phone: e.target.value })}
+                className="mt-1 w-full border rounded p-2"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
                 required
               />
             </label>
-          </div>
+            <div className="flex justify-between">
+              <button type="button" onClick={prev} className="px-4 py-2 border rounded">
+                Indietro
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded"
+                disabled={loading}
+              >
+                {loading ? 'Verifica...' : 'Conferma'}
+              </button>
+            </div>
+          </form>
         )}
-        {step === 3 && (
-          <div className="space-y-4">
-            <label className="block text-sm font-medium">
-              Codice SMS (opzionale)
-              <input
-                className="mt-1 w-full border rounded-md p-2"
-                value={data.code || ''}
-                onChange={(e) => setData({ ...data, code: e.target.value })}
-              />
-            </label>
-          </div>
-        )}
-        {step === 4 && (
-          <div className="space-y-4 text-sm">
-            <p>Azienda: {data.company}</p>
-            <p>Numero WhatsApp: {data.phone}</p>
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                className="h-4 w-4"
-                checked={!!data.accepted}
-                onChange={(e) => setData({ ...data, accepted: e.target.checked })}
-              />
-              <span>Accetto i termini</span>
-            </label>
-          </div>
-        )}
-        <div className="mt-6 flex justify-between">
-          {step > 1 && (
-            <button className="px-4 py-2 text-sm rounded-md border" onClick={prev}>
-              Indietro
-            </button>
-          )}
-          <button
-            className="px-4 py-2 text-sm rounded-md bg-blue-600 text-white ml-auto"
-            onClick={handleNext}
-            disabled={disabled}
-          >
-            {step === 4 ? 'Invia' : 'Avanti'}
-          </button>
-        </div>
       </div>
     </div>
   );
