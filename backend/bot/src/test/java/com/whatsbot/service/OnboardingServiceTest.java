@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,6 +57,8 @@ class OnboardingServiceTest {
     @Test
     void verifyExistingTenant() {
         UUID id = UUID.randomUUID();
+        when(tenantConfigRepository.findById(id))
+                .thenReturn(Optional.of(new TenantConfig()));
         OnboardVerifyRequest request = new OnboardVerifyRequest();
         request.setTenantId(id);
         request.setSmsCode("0000");
@@ -66,10 +69,12 @@ class OnboardingServiceTest {
     @Test
     void verifyNonExistingTenant() {
         UUID id = UUID.randomUUID();
+        when(tenantConfigRepository.findById(id))
+                .thenReturn(Optional.empty());
         OnboardVerifyRequest request = new OnboardVerifyRequest();
         request.setTenantId(id);
         request.setSmsCode("0000");
         var response = onboardingService.verifyPhone(request);
-        assertThat(response.isSuccess()).isTrue();
+        assertThat(response.isSuccess()).isFalse();
     }
 }
