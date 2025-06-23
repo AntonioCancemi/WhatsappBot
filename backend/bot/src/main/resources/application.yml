@@ -7,7 +7,8 @@ logging:
   pattern:
     console: '{"time":"%d{ISO8601}","level":"%p","logger":"%c{1}","message":"%m"}%n'
   file:
-    name: logs/whatsbot.log
+    name: whatsbot.log
+    path: logs
 
 spring:
   datasource:
