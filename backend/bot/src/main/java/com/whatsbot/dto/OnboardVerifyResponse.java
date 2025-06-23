@@ -3,8 +3,9 @@ package com.whatsbot.dto;
 import lombok.Data;
 
 /**
- * Response for onboarding verification. Currently empty by design.
+ * Response returned after verifying tenant onboarding.
  */
 @Data
 public class OnboardVerifyResponse {
+    private boolean verified;
 }

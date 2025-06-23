@@ -7,14 +7,13 @@ logging:
   pattern:
     console: '{"time":"%d{ISO8601}","level":"%p","logger":"%c{1}","message":"%m"}%n'
   file:
-    name: whatsbot.log
-    path: logs
+    name: logs/whatsbot.log
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/whatsbot
-    username: postgres
-    password: root
+    url: jdbc:postgresql://postgres:5432/whatsapp_bot
+    username: admin
+    password: admin
   jpa:
     open-in-view: false
     hibernate:
@@ -23,13 +22,13 @@ spring:
     spring:
 
 whatsapp:
-  base-url: ${WHATSAPP_BASE_URL:https://graph.facebook.com/v17.0}
-  phone-number-id: ${WHATSAPP_PHONE_NUMBER_ID}
-  access-token: ${WHATSAPP_ACCESS_TOKEN}
-  app-secret: ${WHATSAPP_APP_SECRET}
+  base-url: https://graph.facebook.com/v17.0
+  phone-number-id: +14155238886
+  app-secret: change-me
 
 webhook:
-  token-ngrok: ${NGROK_AUTHTOKEN}
+  token-ngrok: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
+
 
 cors:
   enabled: true
