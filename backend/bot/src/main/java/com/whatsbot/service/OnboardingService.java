@@ -6,6 +6,7 @@ import com.whatsbot.dto.OnboardVerifyRequest;
 import com.whatsbot.dto.OnboardVerifyResponse;
 
 public interface OnboardingService {
-    OnboardStartResponse start(OnboardStartRequest request);
-    OnboardVerifyResponse verify(OnboardVerifyRequest request);
+    OnboardStartResponse startOnboarding(OnboardStartRequest request);
+
+    OnboardVerifyResponse verifyPhone(OnboardVerifyRequest request);
 }

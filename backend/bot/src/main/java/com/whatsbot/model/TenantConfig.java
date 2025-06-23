@@ -1,18 +1,21 @@
 package com.whatsbot.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Configuration for a tenant using the WhatsApp bot.
+ * Tenant configuration data.
  */
 @Entity
 @Table(name = "tenant_configs")
@@ -26,17 +29,14 @@ public class TenantConfig {
     @GeneratedValue
     private UUID id;
 
-    /** Unique identifier for the tenant */
-    @Column(nullable = false, unique = true)
-    private String tenantId;
+    @Column(nullable = false)
+    private String businessName;
 
     @Column(nullable = false)
-    private String baseUrl;
+    private String phoneNumber;
 
-    @Column(nullable = false)
     private String phoneNumberId;
 
-    @Column(nullable = false)
     private String accessToken;
 
     @Column(nullable = false)
@@ -44,7 +44,4 @@ public class TenantConfig {
 
     @CreationTimestamp
     private Instant createdAt;
-
-    @UpdateTimestamp
-    private Instant updatedAt;
 }

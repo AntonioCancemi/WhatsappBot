@@ -9,9 +9,9 @@ import lombok.Data;
 @Data
 public class OnboardStartRequest {
     @NotBlank
-    private String baseUrl;
+    private String businessName;
     @NotBlank
-    private String phoneNumberId;
+    private String phoneNumber;
     @NotBlank
     private String accessToken;
     @NotBlank

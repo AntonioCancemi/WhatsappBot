@@ -2,10 +2,13 @@ package com.whatsbot.dto;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 /**
  * Response returned after starting the onboarding flow.
  */
 @Data
 public class OnboardStartResponse {
-    private String tenantId;
+    private UUID tenantId;
+    private String token;
 }
