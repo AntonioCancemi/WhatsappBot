@@ -16,10 +16,26 @@ services:
     networks:
       - whatsapp-net
 
+  # pgAdmin per gestione database
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+    ports:
+      - "5050:80"
+    networks:
+      - whatsapp-net
+
   # Backend Spring Boot service
   backend:
     build:
       context: ./backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - postgres
     ports:
@@ -28,17 +44,16 @@ services:
       - whatsapp-net
 
   # Opzionale: expose backend via Ngrok
-  ngrok:
-    image: ngrok/ngrok:latest
-    depends_on:
-      - backend
-    command: "tcp 8080"
-    environment:
-      NGROK_AUTHTOKEN: 2P1Xy7kC1sLhJHJ6nN3RM6BqPrq_xxxxxxxx
-    networks:
-      - whatsapp-net
-    # Visualizza i log nel terminale
-    tty: true
+  # ngrok:
+  #   image: ngrok/ngrok:latest
+  #   depends_on:
+  #     - backend
+  #   command: "tcp 8080"
+  #   environment:
+  #     NGROK_AUTHTOKEN: 2P1Xy7kC1sLhJHJ6nN3RM6BqPrq_xxxxxxxx
+  #   networks:
+  #     - whatsapp-net
+  #   tty: true
 
 volumes:
   postgres-data:
