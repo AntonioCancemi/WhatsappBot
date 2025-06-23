@@ -100,6 +100,7 @@ public class ConversationalFlowServiceImpl implements ConversationalFlowService 
         FlowStepResponse resp = new FlowStepResponse();
         resp.setStep(nextStepId);
         resp.setMessage(next.getMessage());
+        resp.setStateId(state.getId());
         return resp;
     }
 }

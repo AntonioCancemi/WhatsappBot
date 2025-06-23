@@ -40,6 +40,7 @@ public class ConversationServiceImpl implements ConversationService {
         FlowStepResponse resp = new FlowStepResponse();
         resp.setStep("DATE");
         resp.setMessage("Per quale data desideri prenotare?");
+        resp.setStateId(state.getId());
         return resp;
     }
 
@@ -60,14 +61,14 @@ public class ConversationServiceImpl implements ConversationService {
                 state.setStep("TIME");
                 state.setData(writeData(data));
                 stateRepository.save(state);
-                return response("TIME", "A che ora?");
+                return response(state, "TIME", "A che ora?");
             }
             case "TIME" -> {
                 data.put("time", userResponse);
                 state.setStep("CONFIRM");
                 state.setData(writeData(data));
                 stateRepository.save(state);
-                return response("CONFIRM", "Confermi prenotazione per " + data.get("date") + " alle " + data.get("time") + "? (S\u00ec/No)");
+                return response(state, "CONFIRM", "Confermi prenotazione per " + data.get("date") + " alle " + data.get("time") + "? (Sì/No)");
             }
             case "CONFIRM" -> {
                 if (userResponse.equalsIgnoreCase("s\u00ec") || userResponse.equalsIgnoreCase("si")) {
@@ -76,10 +77,10 @@ public class ConversationServiceImpl implements ConversationService {
                     bookingService.createBooking(state.getUser().getId(), date, time);
                     state.setStep("DONE");
                     stateRepository.save(state);
-                    return response("DONE", "Prenotazione confermata");
+                    return response(state, "DONE", "Prenotazione confermata");
                 } else {
                     stateRepository.delete(state);
-                    return response("CANCELLED", "Prenotazione annullata");
+                    return response(state, "CANCELLED", "Prenotazione annullata");
                 }
             }
             default -> throw new IllegalStateException("Invalid step");
@@ -94,10 +95,11 @@ public class ConversationServiceImpl implements ConversationService {
         }
     }
 
-    private FlowStepResponse response(String step, String message) {
+    private FlowStepResponse response(ConversationState state, String step, String message) {
         FlowStepResponse resp = new FlowStepResponse();
         resp.setStep(step);
         resp.setMessage(message);
+        resp.setStateId(state.getId());
         return resp;
     }
 }
