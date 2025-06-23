@@ -30,5 +30,6 @@
     "@typescript-eslint/eslint-plugin": "^6.13.0",
     "eslint-plugin-react": "^7.33.2",
     "husky": "^9.0.11"
+
   }
 }

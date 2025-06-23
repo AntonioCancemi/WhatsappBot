@@ -5,6 +5,7 @@ echo "🚀 Inizializzazione progetto WhatsApp AI Bot..."
 # Crea struttura base
 mkdir -p src/main/java/com/whatsbot/{controller,dto,service,repository,model,config}
 mkdir -p src/main/resources
+mkdir -p logs
 
 # Copia i file di contesto
 cp README.md ./README.md
