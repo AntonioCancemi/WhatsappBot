@@ -16,7 +16,7 @@ export default function OnboardingWizard() {
   const handleVerify = async (e: FormEvent) => {
     e.preventDefault();
     const res = await verify(code);
-    if (res.success) {
+    if (res.verified) {
       setCompleted(true);
     }
   };
