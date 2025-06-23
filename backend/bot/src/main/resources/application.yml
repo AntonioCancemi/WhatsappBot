@@ -31,7 +31,6 @@ whatsapp:
 webhook:
   token-ngrok: ${NGROK_AUTHTOKEN}
 
-
 cors:
   enabled: true
   allowed-origins:
