@@ -7,5 +7,5 @@ import lombok.Data;
  */
 @Data
 public class OnboardVerifyResponse {
-    private boolean verified;
+    private boolean success;
 }

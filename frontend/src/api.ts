@@ -1,4 +1,10 @@
 import axios from 'axios';
+import {
+  OnboardStartRequest,
+  OnboardStartResponse,
+  OnboardVerifyRequest,
+  OnboardVerifyResponse,
+} from './types';
 
 const api = axios.create({
   baseURL: 'http://localhost:8080/',
@@ -7,12 +13,14 @@ const api = axios.create({
   },
 });
 
-export function onboardStart(body: unknown) {
-  return api.post<{ tenantId: string; token: string }>('/onboard/start', body);
+export async function onboardStart(body: OnboardStartRequest): Promise<OnboardStartResponse> {
+  const { data } = await api.post<OnboardStartResponse>('/onboard/start', body);
+  return data;
 }
 
-export function onboardVerify(body: unknown) {
-  return api.post('/onboard/verify', body);
+export async function onboardVerify(body: OnboardVerifyRequest): Promise<OnboardVerifyResponse> {
+  const { data } = await api.post<OnboardVerifyResponse>('/onboard/verify', body);
+  return data;
 }
 
 export default api;

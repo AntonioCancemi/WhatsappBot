@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,8 +35,8 @@ class OnboardingServiceTest {
     @BeforeEach
     void setup() {
         startRequest = new OnboardStartRequest();
-        startRequest.setBaseUrl("http://test");
-        startRequest.setPhoneNumberId("123");
+        startRequest.setBusinessName("Biz");
+        startRequest.setPhoneNumber("123");
         startRequest.setAccessToken("token");
         startRequest.setAppSecret("secret");
     }
@@ -45,35 +46,35 @@ class OnboardingServiceTest {
         when(tenantConfigRepository.save(any(TenantConfig.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
 
-        var response = onboardingService.start(startRequest);
+        var response = onboardingService.startOnboarding(startRequest);
 
         ArgumentCaptor<TenantConfig> captor = ArgumentCaptor.forClass(TenantConfig.class);
         verify(tenantConfigRepository).save(captor.capture());
-        assertThat(captor.getValue().getTenantId()).isNotBlank();
-        assertThat(response.getTenantId()).isEqualTo(captor.getValue().getTenantId());
+        assertThat(captor.getValue().getBusinessName()).isEqualTo("Biz");
+        assertThat(response.getTenantId()).isNotNull();
     }
 
     @Test
     void verifyExistingTenant() {
-        when(tenantConfigRepository.findByTenantId("abc"))
+        UUID id = UUID.randomUUID();
+        when(tenantConfigRepository.findById(id))
                 .thenReturn(Optional.of(new TenantConfig()));
         OnboardVerifyRequest request = new OnboardVerifyRequest();
-        request.setTenantId("abc");
-
-        var response = onboardingService.verify(request);
-
-        assertThat(response.isVerified()).isTrue();
+        request.setTenantId(id);
+        request.setSmsCode("0000");
+        var response = onboardingService.verifyPhone(request);
+        assertThat(response.isSuccess()).isTrue();
     }
 
     @Test
     void verifyNonExistingTenant() {
-        when(tenantConfigRepository.findByTenantId("missing"))
+        UUID id = UUID.randomUUID();
+        when(tenantConfigRepository.findById(id))
                 .thenReturn(Optional.empty());
         OnboardVerifyRequest request = new OnboardVerifyRequest();
-        request.setTenantId("missing");
-
-        var response = onboardingService.verify(request);
-
-        assertThat(response.isVerified()).isFalse();
+        request.setTenantId(id);
+        request.setSmsCode("0000");
+        var response = onboardingService.verifyPhone(request);
+        assertThat(response.isSuccess()).isFalse();
     }
 }
