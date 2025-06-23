@@ -7,7 +7,6 @@ import com.whatsbot.dto.OnboardVerifyResponse;
 import com.whatsbot.service.OnboardingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +30,8 @@ public class OnboardingController {
         produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<OnboardStartResponse> start(@Valid @RequestBody OnboardStartRequest request) {
-        OnboardStartResponse response = onboardingService.start(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        OnboardStartResponse response = onboardingService.startOnboarding(request);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping(
@@ -41,10 +40,7 @@ public class OnboardingController {
         produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<OnboardVerifyResponse> verify(@Valid @RequestBody OnboardVerifyRequest request) {
-        OnboardVerifyResponse response = onboardingService.verify(request);
-        if (response.isVerified()) {
-            return ResponseEntity.ok(response);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        OnboardVerifyResponse response = onboardingService.verifyPhone(request);
+        return ResponseEntity.ok(response);
     }
 }
