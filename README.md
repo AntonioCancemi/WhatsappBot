@@ -89,8 +89,17 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 ## 🔐 Sicurezza
 
 - Header token per validazione Webhook
-- Variabili sensibili in `application.yml`
+- Variabili sensibili fornite tramite `.env` o variabili d'ambiente
 - Nessun dato sensibile nei log
+
+## 🔑 Variabili d'Ambiente
+
+| Nome variabile | Descrizione |
+|---------------|-------------|
+| `WHATSAPP_PHONE_NUMBER_ID` | ID del numero di telefono WhatsApp |
+| `WHATSAPP_ACCESS_TOKEN` | Token di accesso API |
+| `WHATSAPP_APP_SECRET` | Segreto per validare le firme dei webhook |
+| `NGROK_AUTHTOKEN` | Token per Ngrok (opzionale) |
 
 ## 📦 Integrazione WhatsApp
 
