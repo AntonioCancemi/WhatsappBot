@@ -9,4 +9,6 @@ public class WhatsAppProperties {
     private String baseUrl;
     private String phoneNumberId;
     private String accessToken;
+    /** App secret used to validate incoming webhook signatures */
+    private String appSecret;
 }
