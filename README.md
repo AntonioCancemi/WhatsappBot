@@ -67,8 +67,17 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 ## 🔐 Sicurezza
 
 - Header token per validazione Webhook
-- Variabili sensibili in `application.yml`
+- Variabili sensibili fornite tramite `.env` o variabili d'ambiente
 - Nessun dato sensibile nei log
+
+## 🔑 Variabili d'Ambiente
+
+| Nome variabile | Descrizione |
+|---------------|-------------|
+| `WHATSAPP_PHONE_NUMBER_ID` | ID del numero di telefono WhatsApp |
+| `WHATSAPP_ACCESS_TOKEN` | Token di accesso API |
+| `WHATSAPP_APP_SECRET` | Segreto per validare le firme dei webhook |
+| `NGROK_AUTHTOKEN` | Token per Ngrok (opzionale) |
 
 ## 📦 Integrazione WhatsApp
 
@@ -79,7 +88,11 @@ Sistema leggero di classificazione intent tramite regex o chiamate a HuggingFace
 ## 🧰 Esecuzione locale (dev)
 
 1. Clona il repo
-2. Inserisci in `application.yml` i token di **WhatsApp Cloud API**
+2. Copia `.env.example` in `.env` e imposta:
+   - `WHATSAPP_PHONE_NUMBER_ID`
+   - `WHATSAPP_ACCESS_TOKEN`
+   - `WHATSAPP_APP_SECRET`
+   - (facoltativo) `NGROK_AUTHTOKEN`
 3. Avvia i servizi con `docker-compose up --build`
 4. Esponi `/webhook/receive` (opzionale con Ngrok)
 5. Avvia lo stub di onboarding:

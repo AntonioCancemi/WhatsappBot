@@ -22,12 +22,13 @@ spring:
     spring:
 
 whatsapp:
-  base-url: https://graph.facebook.com/v17.0
-  phone-number-id: +14155238886
-  app-secret: change-me
+  base-url: ${WHATSAPP_BASE_URL:https://graph.facebook.com/v17.0}
+  phone-number-id: ${WHATSAPP_PHONE_NUMBER_ID}
+  access-token: ${WHATSAPP_ACCESS_TOKEN}
+  app-secret: ${WHATSAPP_APP_SECRET}
 
 webhook:
-  token-ngrok: 2yoLDChUDPYrOz1BcUrRaPWv1r5_52dYmvKqSTaao6nkcnaGs
+  token-ngrok: ${NGROK_AUTHTOKEN}
 
 
 cors:

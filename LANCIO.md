@@ -15,7 +15,7 @@ Questa guida descrive i passaggi per avviare localmente il bot WhatsApp e la das
    git clone <repo-url>
    cd WhatsappBot
    ```
-2. Creare il database e aggiornare `bot/src/main/resources/application.yml` con credenziali e token WhatsApp.
+2. Creare il database e configurare il file `.env` copiando `.env.example` e inserendo le credenziali WhatsApp.
 3. (Opzionale) Configurare il proxy pubblico per il webhook, ad esempio con Ngrok.
 
 ## Avvio Backend
