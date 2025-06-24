@@ -1,6 +1,7 @@
 package com.whatsbot.auth.controller;
 
 import com.whatsbot.auth.dto.*;
+ 
 import com.whatsbot.auth.service.AuthService;
 import com.whatsbot.auth.middleware.TenantContext;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class AuthController {
         return authService.register(request, tenantId);
     }
 
+    @PostMapping("/register")
+    public LoginResponse register(@RequestBody RegisterRequest request) {
+        return authService.register(request);
+    }
+
     @GetMapping("/me")
     public UserDto me(Authentication authentication) {
         UUID tenantId = TenantContext.get();
@@ -37,6 +43,7 @@ public class AuthController {
 
     @GetMapping("/roles")
     public List<RoleDto> roles() {
+    public java.util.List<RoleDto> roles() {
         return authService.listRoles();
     }
 }

@@ -51,6 +51,7 @@ export interface RegisterRequest {
   fullName: string;
   password: string;
   tenantName: string;
+ 
 }
 
 export interface Role {

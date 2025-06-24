@@ -33,14 +33,16 @@ public class DataInitializer implements CommandLineRunner {
         Role superAdmin = roleRepository.save(new Role(null, "SUPER_ADMIN", Set.of(full)));
         Role tenantAdmin = roleRepository.save(new Role(null, "TENANT_ADMIN", Set.of(full)));
         Role userRole = roleRepository.save(new Role(null, "USER", Set.of(readOnly)));
+ 
 
         User admin = new User();
         admin.setEmail("admin@demo.com");
         admin.setFullName("Admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setTenant(tenant);
-        admin.setRole(superAdmin);
+         admin.setRole(superAdmin);
         admin.setAccessLevel(full);
+ 
         userRepository.save(admin);
     }
 }

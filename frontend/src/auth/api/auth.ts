@@ -13,6 +13,11 @@ export async function register(body: RegisterRequest): Promise<RegisterResponse>
   return data;
 }
 
+export async function register(body: RegisterRequest): Promise<LoginResponse> {
+  const { data } = await api.post<LoginResponse>('/api/auth/register', body);
+  return data;
+}
+
 export async function me() {
   const { data } = await api.get('/api/auth/me');
   return data;

@@ -8,11 +8,13 @@ export default function RegisterPage() {
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
   const [tenantName, setTenantName] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await register({ email, password, fullName, tenantName });
+
     navigate('/dashboard');
   };
 
@@ -38,6 +40,7 @@ export default function RegisterPage() {
           placeholder="Full name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
+ 
           required
         />
         <input
