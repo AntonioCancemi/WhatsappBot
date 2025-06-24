@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { login as loginApi } from '../api';
-import { LoginRequest } from '../types';
+import { login as loginApi } from '../api/auth';
+import { LoginRequest } from '../../types';
 import useAuth from './useAuth';
 
 export default function useLogin() {

@@ -79,5 +79,14 @@ class AuthControllerTest {
                 .andExpect(jsonPath("$.token").isNotEmpty());
     }
 
+    @Test
+    void loginFailure() throws Exception {
+        var req = new Login("john", "wrong", "acme");
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(req)))
+                .andExpect(status().isUnauthorized());
+    }
+
     private record Login(String username, String password, String tenant) {}
 }

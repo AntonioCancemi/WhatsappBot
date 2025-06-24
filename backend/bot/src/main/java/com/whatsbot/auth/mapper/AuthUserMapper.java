@@ -5,8 +5,8 @@ import com.whatsbot.auth.model.AuthUser;
 import org.springframework.stereotype.Component;
 
 /**
- * Simple mapper for converting {@link AuthUser} entities to {@link UserDto}
- * without relying on MapStruct.
+ * Simple mapper to convert {@link AuthUser} entities into {@link UserDto}
+ * without using MapStruct.
  */
 @Component
 public class AuthUserMapper {
@@ -19,7 +19,7 @@ public class AuthUserMapper {
                 user.getId(),
                 user.getUsername(),
                 user.getTenant() != null ? user.getTenant().getId() : null,
-                user.getRoles().stream().map(r -> r.getName()).toList());
+                user.getRoles().stream().map(role -> role.getName()).toList());
     }
-
 }
+

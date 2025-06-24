@@ -7,7 +7,7 @@ Questo progetto è una piattaforma SaaS modulare che unisce la potenza dell'inte
 - Codice leggibile, manutenibile e testato alla generazione
 
 ## 🛠️ Stack Tecnico
-- **Backend**: Java 21, Spring Boot, Hibernate, MapStruct
+ - **Backend**: Java 21, Spring Boot, Hibernate
 - **Frontend**: React + Bootstrap 5
 - **Database**: PostgreSQL 
 - **AI**: OpenAI GPT-4
@@ -44,5 +44,8 @@ Questo progetto è una piattaforma SaaS modulare che unisce la potenza dell'inte
 2. Struttura modulare e documentata
 3. Test automatici generati
 4. Pronto per deployment
+
+## ❗ Politica interna
+- Mai più utilizzare H2 o MapStruct
 
 ---

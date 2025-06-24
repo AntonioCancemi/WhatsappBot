@@ -32,19 +32,31 @@ public class JwtService {
     }
 
     public UUID extractUser(String token) {
-        String id = Jwts.parserBuilder().setSigningKey(key).build()
-                .parseClaimsJws(token).getBody().get("uid", String.class);
-        return id != null ? UUID.fromString(id) : null;
+        try {
+            String id = Jwts.parserBuilder().setSigningKey(key).build()
+                    .parseClaimsJws(token).getBody().get("uid", String.class);
+            return id != null ? UUID.fromString(id) : null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public UUID extractTenant(String token) {
-        String id = Jwts.parserBuilder().setSigningKey(key).build()
-                .parseClaimsJws(token).getBody().get("tid", String.class);
-        return id != null ? UUID.fromString(id) : null;
+        try {
+            String id = Jwts.parserBuilder().setSigningKey(key).build()
+                    .parseClaimsJws(token).getBody().get("tid", String.class);
+            return id != null ? UUID.fromString(id) : null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String extractUsername(String token) {
-        return Jwts.parserBuilder().setSigningKey(key).build()
-                .parseClaimsJws(token).getBody().get("sub", String.class);
+        try {
+            return Jwts.parserBuilder().setSigningKey(key).build()
+                    .parseClaimsJws(token).getBody().get("sub", String.class);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
