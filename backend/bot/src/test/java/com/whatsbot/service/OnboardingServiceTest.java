@@ -1,7 +1,7 @@
 // package com.whatsbot.service;
 
-// import com.whatsbot.dto.OnboardStartRequest;
-// import com.whatsbot.dto.OnboardVerifyRequest;
+// import com.whatsbot.modules.messaging.dto.OnboardStartRequest;
+// import com.whatsbot.modules.messaging.dto.OnboardVerifyRequest;
 // import com.whatsbot.model.TenantConfig;
 // import com.whatsbot.repository.TenantConfigRepository;
 // import com.whatsbot.service.impl.OnboardingServiceImpl;

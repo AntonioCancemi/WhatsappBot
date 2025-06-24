@@ -1,6 +1,6 @@
-package com.whatsbot.booking;
+package com.whatsbot.modules.booking;
 
-import com.whatsbot.management.service.BookingManager;
+import com.whatsbot.modules.management.service.BookingManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
