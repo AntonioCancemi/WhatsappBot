@@ -30,9 +30,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/onboarding/**").permitAll()//TODO remove
                         .anyRequest().authenticated())
-                .sessionManagement(man -> man.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//                .addFilterBefore(new JwtAuthFilter(jwtService, userDetailsService), UsernamePasswordAuthenticationFilter.class)
-//                .addFilterAfter(new TenantFilter(jwtService), JwtAuthFilter.class);
+                .sessionManagement(man -> man.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(new JwtAuthFilter(jwtService, userDetailsService), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new TenantFilter(jwtService), JwtAuthFilter.class);
         return http.build();
     }
 

@@ -1,8 +1,8 @@
 package com.whatsbot.auth.security;
 
 import com.whatsbot.auth.exception.AuthException;
-import com.whatsbot.auth.model.AuthUser;
-import com.whatsbot.auth.repository.AuthUserRepository;
+import com.whatsbot.auth.model.User;
+import com.whatsbot.auth.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,14 +11,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class AuthUserDetailsService implements UserDetailsService {
 
-    private final AuthUserRepository repository;
+    private final UserRepository repository;
 
-    public AuthUserDetailsService(AuthUserRepository repository) {
+    public AuthUserDetailsService(UserRepository repository) {
         this.repository = repository;
     }
 
@@ -27,13 +26,11 @@ public class AuthUserDetailsService implements UserDetailsService {
         throw new UsernameNotFoundException("Tenant required");
     }
 
-    public UserDetails loadByUsernameAndTenant(String username, String tenant) {
-        AuthUser user = repository.findByUsernameAndTenant_Name(username, tenant)
+    public UserDetails loadByEmailAndTenant(String email, String tenant) {
+        User user = repository.findByEmailAndTenant_Name(email, tenant)
                 .orElseThrow(() -> new AuthException("Invalid credentials"));
-        List<GrantedAuthority> auths = user.getRoles().stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName()))
-                .collect(Collectors.toList());
+        List<GrantedAuthority> auths = List.of(new SimpleGrantedAuthority(user.getRole().getName()));
         return new org.springframework.security.core.userdetails.User(
-                user.getUsername(), user.getPassword(), auths);
+                user.getEmail(), user.getPassword(), auths);
     }
 }

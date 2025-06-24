@@ -1,4 +1,3 @@
 package com.whatsbot.auth.dto;
 
-public record LoginRequest(String username, String password, String tenant) {
-}
+public record LoginRequest(String email, String password) {}
