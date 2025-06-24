@@ -36,3 +36,15 @@ export interface OnboardVerifyRequest {
 export interface OnboardVerifyResponse {
   verified: boolean;
 }
+
+export interface BroadcastMessage {
+  id: string;
+  text: string;
+  scheduledAt: string;
+  status: string;
+}
+
+export interface BroadcastCreateRequest {
+  text: string;
+  scheduledAt: string;
+}

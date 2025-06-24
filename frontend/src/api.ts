@@ -4,6 +4,8 @@ import {
   OnboardStartResponse,
   OnboardVerifyRequest,
   OnboardVerifyResponse,
+  BroadcastMessage,
+  BroadcastCreateRequest,
 } from './types';
 
 const api = axios.create({
@@ -20,6 +22,16 @@ export async function onboardStart(body: OnboardStartRequest): Promise<OnboardSt
 
 export async function onboardVerify(body: OnboardVerifyRequest): Promise<OnboardVerifyResponse> {
   const { data } = await api.post<OnboardVerifyResponse>('/onboard/verify', body);
+  return data;
+}
+
+export async function getBroadcasts() {
+  const { data } = await api.get<BroadcastMessage[]>('/api/broadcasts');
+  return data;
+}
+
+export async function createBroadcast(body: BroadcastCreateRequest) {
+  const { data } = await api.post<BroadcastMessage>('/api/broadcasts', body);
   return data;
 }
 
