@@ -46,3 +46,25 @@ export interface LoginRequest {
 export interface LoginResponse {
   token: string;
 }
+
+export interface ServiceItem {
+  id: string;
+  name: string;
+  durationMinutes: number;
+  bufferMinutes: number;
+  maxPerSlot: number;
+}
+
+export interface Slot {
+  time: string;
+  remaining: number;
+}
+
+export interface Booking {
+  id: string;
+  userId: string;
+  serviceId: string;
+  date: string;
+  time: string;
+  status: string;
+}
