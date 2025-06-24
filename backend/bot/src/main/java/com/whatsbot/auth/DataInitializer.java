@@ -2,12 +2,11 @@ package com.whatsbot.auth;
 
 import com.whatsbot.auth.model.*;
 import com.whatsbot.auth.repository.*;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Set;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
@@ -15,7 +14,8 @@ public class DataInitializer implements CommandLineRunner {
 
     private final TenantRepository tenantRepository;
     private final RoleRepository roleRepository;
-    private final AuthUserRepository userRepository;
+    private final AccessLevelRepository accessLevelRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -24,23 +24,25 @@ public class DataInitializer implements CommandLineRunner {
             return;
         }
 
-        Tenant tenant = new Tenant(null, "demo");
-        tenant = tenantRepository.save(tenant);
+        Tenant tenant = tenantRepository.save(new Tenant(null, "demo"));
 
-        Role superAdmin = new Role(null, "SUPER_ADMIN", Set.of());
-        superAdmin = roleRepository.save(superAdmin);
+        AccessLevel full = accessLevelRepository.save(new AccessLevel(null, "FULL_ACCESS"));
+        AccessLevel readOnly = accessLevelRepository.save(new AccessLevel(null, "READ_ONLY"));
+        accessLevelRepository.save(new AccessLevel(null, "CUSTOM"));
 
-        Role tenantAdmin = new Role(null, "TENANT_ADMIN", Set.of());
-        tenantAdmin = roleRepository.save(tenantAdmin);
+        Role superAdmin = roleRepository.save(new Role(null, "SUPER_ADMIN", Set.of(full)));
+        Role tenantAdmin = roleRepository.save(new Role(null, "TENANT_ADMIN", Set.of(full)));
+        Role userRole = roleRepository.save(new Role(null, "USER", Set.of(readOnly)));
+ 
 
-        Role userRole = new Role(null, "USER", Set.of());
-        userRole = roleRepository.save(userRole);
-
-        AuthUser admin = new AuthUser();
-        admin.setUsername("admin");
+        User admin = new User();
+        admin.setEmail("admin@demo.com");
+        admin.setFullName("Admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setTenant(tenant);
-        admin.setRoles(Set.of(superAdmin));
+         admin.setRole(superAdmin);
+        admin.setAccessLevel(full);
+ 
         userRepository.save(admin);
     }
 }

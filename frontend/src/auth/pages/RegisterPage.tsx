@@ -4,14 +4,17 @@ import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage() {
   const { register, error } = useRegister();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
-  const [tenant, setTenant] = useState('');
+  const [tenantName, setTenantName] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await register({ username, password, tenant });
+    await register({ email, password, fullName, tenantName });
+
     navigate('/dashboard');
   };
 
@@ -21,15 +24,23 @@ export default function RegisterPage() {
         <input
           className="w-full border p-2 rounded"
           placeholder="Tenant"
-          value={tenant}
-          onChange={(e) => setTenant(e.target.value)}
+          value={tenantName}
+          onChange={(e) => setTenantName(e.target.value)}
           required
         />
         <input
           className="w-full border p-2 rounded"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          className="w-full border p-2 rounded"
+          placeholder="Full name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+ 
           required
         />
         <input

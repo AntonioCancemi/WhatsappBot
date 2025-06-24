@@ -1,16 +1,15 @@
 package com.whatsbot.auth.controller;
 
-import com.whatsbot.auth.dto.LoginRequest;
-import com.whatsbot.auth.dto.LoginResponse;
-import com.whatsbot.auth.dto.RegisterRequest;
-import com.whatsbot.auth.dto.RoleDto;
-import com.whatsbot.auth.dto.UserDto;
+import com.whatsbot.auth.dto.*;
+ 
 import com.whatsbot.auth.service.AuthService;
 import com.whatsbot.auth.middleware.TenantContext;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -21,7 +20,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
-        return authService.login(request);
+        UUID tenantId = TenantContext.get();
+        return authService.login(request, tenantId);
+    }
+
+    @PostMapping("/register")
+    public RegisterResponse register(@RequestBody RegisterRequest request) {
+        UUID tenantId = TenantContext.get();
+        return authService.register(request, tenantId);
     }
 
     @PostMapping("/register")
@@ -36,6 +42,7 @@ public class AuthController {
     }
 
     @GetMapping("/roles")
+    public List<RoleDto> roles() {
     public java.util.List<RoleDto> roles() {
         return authService.listRoles();
     }

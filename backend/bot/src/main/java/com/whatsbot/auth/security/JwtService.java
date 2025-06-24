@@ -19,11 +19,11 @@ public class JwtService {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
-    public String generateToken(UUID userId, String username, UUID tenantId) {
+    public String generateToken(UUID userId, String email, UUID tenantId) {
         long now = System.currentTimeMillis();
         return Jwts.builder()
                 .claim("uid", userId.toString())
-                .claim("sub", username)
+                .claim("sub", email)
                 .claim("tid", tenantId.toString())
                 .setIssuedAt(new Date(now))
                 .setExpiration(new Date(now + 3600_000))
@@ -51,7 +51,7 @@ public class JwtService {
         }
     }
 
-    public String extractUsername(String token) {
+    public String extractEmail(String token) {
         try {
             return Jwts.parser().setSigningKey(key).build()
                     .parseClaimsJws(token).getBody().get("sub", String.class);

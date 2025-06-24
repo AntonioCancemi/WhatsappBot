@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const { login, error } = useLogin();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [tenant, setTenant] = useState('');
+  const [tenantName, setTenantName] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await login({ username, password, tenant });
+    await login({ email, password }, tenantName);
     navigate('/dashboard');
   };
 
@@ -21,15 +21,15 @@ export default function LoginPage() {
         <input
           className="w-full border p-2 rounded"
           placeholder="Tenant"
-          value={tenant}
-          onChange={(e) => setTenant(e.target.value)}
+          value={tenantName}
+          onChange={(e) => setTenantName(e.target.value)}
           required
         />
         <input
           className="w-full border p-2 rounded"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input

@@ -7,9 +7,9 @@ export default function useLogin() {
   const auth = useAuth();
   const [error, setError] = useState('');
 
-  const login = async (req: LoginRequest) => {
+  const login = async (req: LoginRequest, tenantName: string) => {
     try {
-      const res = await loginApi(req);
+      const res = await loginApi(req, tenantName);
       auth.login(res.token);
     } catch {
       setError('Credenziali non valide');

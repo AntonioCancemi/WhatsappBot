@@ -1,10 +1,14 @@
 package com.whatsbot.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.whatsbot.auth.model.AuthUser;
+import com.whatsbot.auth.model.User;
 import com.whatsbot.auth.model.Tenant;
-import com.whatsbot.auth.repository.AuthUserRepository;
+import com.whatsbot.auth.model.Role;
+import com.whatsbot.auth.model.AccessLevel;
+import com.whatsbot.auth.repository.UserRepository;
 import com.whatsbot.auth.repository.TenantRepository;
+import com.whatsbot.auth.repository.RoleRepository;
+import com.whatsbot.auth.repository.AccessLevelRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,7 +23,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
-
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -49,30 +52,46 @@ class AuthControllerTest {
     @Autowired
     private TenantRepository tenantRepository;
     @Autowired
-    private AuthUserRepository userRepository;
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private AccessLevelRepository accessLevelRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
     private ObjectMapper objectMapper;
 
     private Tenant tenant;
+    private Role role;
+    private AccessLevel level;
 
     @BeforeEach
     void setup() {
         userRepository.deleteAll();
         tenantRepository.deleteAll();
+        roleRepository.deleteAll();
+        accessLevelRepository.deleteAll();
+
         tenant = tenantRepository.save(new Tenant(null, "acme"));
-        AuthUser u = new AuthUser();
-        u.setUsername("john");
+        level = accessLevelRepository.save(new AccessLevel(null, "FULL_ACCESS"));
+        role = roleRepository.save(new Role(null, "USER", java.util.Set.of(level)));
+
+        User u = new User();
+        u.setEmail("john@example.com");
+        u.setFullName("John");
         u.setPassword(passwordEncoder.encode("pwd"));
         u.setTenant(tenant);
+        u.setRole(role);
+        u.setAccessLevel(level);
         userRepository.save(u);
     }
 
     @Test
     void loginSuccess() throws Exception {
-        var req = new Login("john", "pwd", "acme");
+        var req = new Login("john@example.com", "pwd");
         mockMvc.perform(post("/api/auth/login")
+                        .header("X-Tenant-ID", tenant.getId().toString())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(req)))
                 .andExpect(status().isOk())
@@ -81,12 +100,13 @@ class AuthControllerTest {
 
     @Test
     void loginFailure() throws Exception {
-        var req = new Login("john", "wrong", "acme");
+        var req = new Login("john@example.com", "wrong");
         mockMvc.perform(post("/api/auth/login")
+                        .header("X-Tenant-ID", tenant.getId().toString())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(req)))
                 .andExpect(status().isUnauthorized());
     }
 
-    private record Login(String username, String password, String tenant) {}
+    private record Login(String email, String password) {}
 }

@@ -23,12 +23,12 @@ export interface OnboardStartRequest {
 }
 
 export interface OnboardStartResponse {
-  tenantId: string;
+  tenantNameId: string;
   token: string;
 }
 
 export interface OnboardVerifyRequest {
-  tenantId: string;
+  tenantNameId: string;
   token: string;
   code: string;
 }
@@ -38,9 +38,8 @@ export interface OnboardVerifyResponse {
 }
 
 export interface LoginRequest {
-  username: string;
+  email: string;
   password: string;
-  tenant: string;
 }
 
 export interface LoginResponse {
@@ -48,9 +47,11 @@ export interface LoginResponse {
 }
 
 export interface RegisterRequest {
-  username: string;
+  email: string;
+  fullName: string;
   password: string;
-  tenant: string;
+  tenantName: string;
+ 
 }
 
 export interface Role {

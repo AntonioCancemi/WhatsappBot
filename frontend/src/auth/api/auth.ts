@@ -1,8 +1,15 @@
 import api from '../../api';
-import { LoginRequest, LoginResponse, RegisterRequest, Role } from '../../types';
+import { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, Role } from '../../types';
 
-export async function login(body: LoginRequest): Promise<LoginResponse> {
-  const { data } = await api.post<LoginResponse>('/api/auth/login', body);
+export async function login(body: LoginRequest, tenantName: string): Promise<LoginResponse> {
+  const { data } = await api.post<LoginResponse>('/api/auth/login', body, {
+    headers: { 'X-Tenant-ID': tenantName },
+  });
+  return data;
+}
+
+export async function register(body: RegisterRequest): Promise<RegisterResponse> {
+  const { data } = await api.post<RegisterResponse>('/api/auth/register', body);
   return data;
 }
 

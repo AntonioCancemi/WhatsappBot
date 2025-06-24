@@ -28,11 +28,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String auth = request.getHeader("Authorization");
         if (auth != null && auth.startsWith("Bearer ")) {
             String token = auth.substring(7);
-            var username = jwtService.extractUsername(token);
+            var email = jwtService.extractEmail(token);
             var tenantId = jwtService.extractTenant(token);
-            if (username != null && tenantId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (email != null && tenantId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 TenantContext.set(tenantId);
-                var details = userDetailsService.loadByUsernameAndTenant(username, tenantId.toString());
+                var details = userDetailsService.loadByEmailAndTenant(email, tenantId.toString());
                 var authToken = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
