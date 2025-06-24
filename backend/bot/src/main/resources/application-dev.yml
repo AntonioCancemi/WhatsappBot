@@ -7,21 +7,20 @@ logging:
   pattern:
     console: '{"time":"%d{ISO8601}","level":"%p","logger":"%c{1}","message":"%m"}%n'
   file:
-    name: whatsbot.log
-    path: logs
+    name: logs/whatsbot.log
 
 spring:
   datasource:
-    url: jdbc:h2:mem:whatsbot;DB_CLOSE_DELAY=-1
-    username: sa
-    password: 
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/whatsapp_bot
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
   jpa:
-    open-in-view: false
     hibernate:
-      ddl-auto: create-drop
-    show-sql: false
-
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 whatsapp:
   base-url: ${WHATSAPP_BASE_URL:https://graph.facebook.com/v17.0}
