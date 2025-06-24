@@ -3,7 +3,7 @@
 // import com.fasterxml.jackson.databind.ObjectMapper;
 // import com.whatsbot.model.User;
 // import com.whatsbot.model.Booking;
-// import com.whatsbot.repository.UserRepository;
+// import com.whatsbot.repository.ContactRepository;
 // import com.whatsbot.repository.BookingRepository;
 // import com.whatsbot.repository.ConversationStateRepository;
 // import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@
 //     @Autowired
 //     private MockMvc mockMvc;
 //     @Autowired
-//     private UserRepository userRepository;
+//     private ContactRepository userRepository;
 //     @Autowired
 //     private BookingRepository bookingRepository;
 //     @Autowired

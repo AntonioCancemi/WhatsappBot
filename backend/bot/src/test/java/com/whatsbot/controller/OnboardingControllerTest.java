@@ -1,7 +1,7 @@
  package com.whatsbot.controller;
 
  import com.fasterxml.jackson.databind.ObjectMapper;
- import com.whatsbot.tenant.dto.OnboardStartRequest;
+ import com.whatsbot.modules.tenant.dto.OnboardStartRequest;
  import org.junit.jupiter.api.Test;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
