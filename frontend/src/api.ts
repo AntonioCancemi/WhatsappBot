@@ -4,8 +4,6 @@ import {
   OnboardStartResponse,
   OnboardVerifyRequest,
   OnboardVerifyResponse,
-  LoginRequest,
-  LoginResponse,
 } from './types';
 
 const api = axios.create({
@@ -31,11 +29,6 @@ export async function onboardStart(body: OnboardStartRequest): Promise<OnboardSt
 
 export async function onboardVerify(body: OnboardVerifyRequest): Promise<OnboardVerifyResponse> {
   const { data } = await api.post<OnboardVerifyResponse>('/onboard/verify', body);
-  return data;
-}
-
-export async function login(body: LoginRequest): Promise<LoginResponse> {
-  const { data } = await api.post<LoginResponse>('/api/auth/login', body);
   return data;
 }
 

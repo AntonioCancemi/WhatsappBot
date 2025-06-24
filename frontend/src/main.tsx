@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Landing from './pages/Landing';
 import OnboardPage from './pages/OnboardPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './auth/pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
-import RequireAuth from './components/auth/RequireAuth';
-import { AuthProvider } from './hooks/useAuth';
+import RequireAuth from './auth/components/RequireAuth';
+import { AuthProvider } from './auth/hooks/useAuth';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
