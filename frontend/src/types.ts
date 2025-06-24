@@ -47,6 +47,17 @@ export interface LoginResponse {
   token: string;
 }
 
+export interface RegisterRequest {
+  username: string;
+  password: string;
+  tenant: string;
+}
+
+export interface Role {
+  id: string;
+  name: string;
+}
+
 export interface ServiceItem {
   id: string;
   name: string;
