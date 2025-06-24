@@ -1,0 +1,28 @@
+{
+  "project": "whatsapp-bot-ai-saas",
+  "team_mode": true,
+  "language": "java",
+  "frontend": "react",
+  "modules": [
+    "auth", "booking", "ai", "dashboard", "crm", "broadcast", "training"
+  ],
+  "style": "enterprise",
+  "commenting": true,
+  "multitenancy": true,
+  "ai_integration": true,
+  "generation_speed": "ultra",
+  "precision": "clockwork",
+  "database": "PostgreSQL",
+  "llm": "gpt-4",
+  "temperature": 0.1,
+  "contextual_memory": true,
+  "output": {
+    "filestructure": true,
+    "code_quality": "strict",
+    "error_tolerance": "zero",
+    "compliance": "best-practices"
+  },
+  "agents": [
+    "default", "lead_dev", "frontend_lead", "ai_engineer", "qa_automation", "devops_agent"
+  ]
+}
