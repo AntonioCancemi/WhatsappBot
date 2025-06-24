@@ -5,22 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02478f4c-cff3-4897-8662-152157e0232c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/bot/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/auth/model/AuthUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/auth/model/AuthUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/auth/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/auth/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/auth/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/auth/security/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/booking/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/booking/model/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/booking/model/ConversationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/booking/model/ConversationState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/booking/service/impl/ConversationalFlowServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/booking/service/impl/ConversationalFlowServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/tenant/service/impl/OnboardingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/tenant/service/impl/OnboardingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/IntentClassifierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/IntentClassifierService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/impl/HelpServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/impl/HelpServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/impl/IntentClassifierServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/impl/IntentClassifierServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/impl/MessageProcessorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/java/com/whatsbot/user/service/impl/MessageProcessorServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/bot/src/test/java/com/whatsbot/controller/OnboardingControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot/src/test/java/com/whatsbot/controller/OnboardingControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +30,36 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.OnboardingControllerTest.startReturnsTenantId.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="OnboardingControllerTest.startReturnsTenantId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.whatsbot.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.whatsbot.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.whatsbot.controller.OnboardingControllerTest" />
+      <option name="METHOD_NAME" value="startReturnsTenantId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.OnboardingControllerTest.startReturnsTenantId" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

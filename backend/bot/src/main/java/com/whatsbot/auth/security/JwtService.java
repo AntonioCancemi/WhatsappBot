@@ -15,7 +15,7 @@ public class JwtService {
 
     private final Key key;
 
-    public JwtService(@Value("${app.jwt.secret:secret}") String secret) {
+    public JwtService(@Value("${whatsapp.app-secret:secret}") String secret) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
@@ -33,7 +33,7 @@ public class JwtService {
 
     public UUID extractUser(String token) {
         try {
-            String id = Jwts.parserBuilder().setSigningKey(key).build()
+            String id = Jwts.parser().setSigningKey(key).build()
                     .parseClaimsJws(token).getBody().get("uid", String.class);
             return id != null ? UUID.fromString(id) : null;
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class JwtService {
 
     public UUID extractTenant(String token) {
         try {
-            String id = Jwts.parserBuilder().setSigningKey(key).build()
+            String id = Jwts.parser().setSigningKey(key).build()
                     .parseClaimsJws(token).getBody().get("tid", String.class);
             return id != null ? UUID.fromString(id) : null;
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class JwtService {
 
     public String extractUsername(String token) {
         try {
-            return Jwts.parserBuilder().setSigningKey(key).build()
+            return Jwts.parser().setSigningKey(key).build()
                     .parseClaimsJws(token).getBody().get("sub", String.class);
         } catch (Exception e) {
             return null;
