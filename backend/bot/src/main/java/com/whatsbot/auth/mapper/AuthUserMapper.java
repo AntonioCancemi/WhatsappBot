@@ -21,4 +21,5 @@ public class AuthUserMapper {
                 user.getTenant() != null ? user.getTenant().getId() : null,
                 user.getRoles().stream().map(r -> r.getName()).toList());
     }
+
 }
