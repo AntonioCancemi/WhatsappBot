@@ -1,6 +1,7 @@
 package com.whatsbot.user.service.impl;
 
-import com.whatsbot.intent.IntentType;
+
+import com.whatsbot.user.intent.IntentType;
 import com.whatsbot.user.service.HelpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

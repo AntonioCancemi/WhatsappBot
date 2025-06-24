@@ -7,15 +7,17 @@ import com.whatsbot.tenant.dto.OnboardVerifyResponse;
 import com.whatsbot.tenant.model.TenantConfig;
 import com.whatsbot.tenant.repository.TenantConfigRepository;
 import com.whatsbot.tenant.service.OnboardingService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.Mac;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 
 @Service

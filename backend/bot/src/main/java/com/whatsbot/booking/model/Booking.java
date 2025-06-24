@@ -1,5 +1,6 @@
 package com.whatsbot.booking.model;
 
+import com.whatsbot.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

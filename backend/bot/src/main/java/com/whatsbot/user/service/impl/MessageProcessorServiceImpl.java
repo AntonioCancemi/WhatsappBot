@@ -1,11 +1,11 @@
 package com.whatsbot.user.service.impl;
 
+import com.whatsbot.booking.service.BookingService;
+import com.whatsbot.booking.service.InfoService;
 import com.whatsbot.user.dto.MessageDto;
-import com.whatsbot.intent.IntentType;
+import com.whatsbot.user.intent.IntentType;
 import com.whatsbot.user.repository.UserRepository;
-import com.whatsbot.user.service.BookingService;
 import com.whatsbot.user.service.HelpService;
-import com.whatsbot.user.service.InfoService;
 import com.whatsbot.user.service.IntentClassifierService;
 import com.whatsbot.common.service.MessageAuditService;
 import com.whatsbot.user.service.MessageProcessorService;

@@ -11,9 +11,9 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/whatsapp_bot
-    username: admin
-    password: admin
+    url: jdbc:postgresql://localhost:5432/whatsbot_dev
+    username: postgres
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -25,8 +25,10 @@ spring:
 whatsapp:
   base-url: ${WHATSAPP_BASE_URL:https://graph.facebook.com/v17.0}
   phone-number-id: ${WHATSAPP_PHONE_NUMBER_ID}
-  access-token: ${WHATSAPP_ACCESS_TOKEN}
-  app-secret: ${WHATSAPP_APP_SECRET}
+#  access-token: ${WHATSAPP_ACCESS_TOKEN}
+#  app-secret: ${WHATSAPP_APP_SECRET}
+  access-token: ajfofabfowegwrn0230922vbuf2cn2c2ifwengnrugn949g93g3
+  app-secret: afna33432jsovw45v0329552fsefagagregwsfegsfaf
 
 webhook:
   token-ngrok: ${NGROK_AUTHTOKEN}

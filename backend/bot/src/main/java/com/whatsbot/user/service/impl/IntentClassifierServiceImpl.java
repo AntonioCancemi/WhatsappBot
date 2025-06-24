@@ -1,7 +1,8 @@
 package com.whatsbot.user.service.impl;
 
-import com.whatsbot.intent.IntentClassifier;
-import com.whatsbot.intent.IntentType;
+
+import com.whatsbot.user.intent.IntentClassifier;
+import com.whatsbot.user.intent.IntentType;
 import com.whatsbot.user.service.IntentClassifierService;
 import org.springframework.stereotype.Service;
 
