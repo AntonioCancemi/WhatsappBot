@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
 
 export default function RequireAuth({ children }: { children: JSX.Element }) {
   const { token } = useAuth();

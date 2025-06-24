@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface AuthUserRepository extends JpaRepository<AuthUser, UUID> {
     Optional<AuthUser> findByUsernameAndTenant_Name(String username, String tenantName);
+
+    Optional<AuthUser> findByUsernameAndTenant_Id(String username, UUID tenantId);
 }
