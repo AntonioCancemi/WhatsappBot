@@ -27,14 +27,20 @@ public class DataInitializer implements CommandLineRunner {
         Tenant tenant = new Tenant(null, "demo");
         tenant = tenantRepository.save(tenant);
 
-        Role role = new Role(null, "SUPER_ADMIN", Set.of());
-        role = roleRepository.save(role);
+        Role superAdmin = new Role(null, "SUPER_ADMIN", Set.of());
+        superAdmin = roleRepository.save(superAdmin);
+
+        Role tenantAdmin = new Role(null, "TENANT_ADMIN", Set.of());
+        tenantAdmin = roleRepository.save(tenantAdmin);
+
+        Role userRole = new Role(null, "USER", Set.of());
+        userRole = roleRepository.save(userRole);
 
         AuthUser admin = new AuthUser();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setTenant(tenant);
-        admin.setRoles(Set.of(role));
+        admin.setRoles(Set.of(superAdmin));
         userRepository.save(admin);
     }
 }
