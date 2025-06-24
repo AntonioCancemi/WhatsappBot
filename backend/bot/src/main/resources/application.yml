@@ -18,9 +18,9 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: false
-    spring:
+
 
 whatsapp:
   base-url: ${WHATSAPP_BASE_URL:https://graph.facebook.com/v17.0}

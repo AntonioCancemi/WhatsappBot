@@ -12,8 +12,10 @@ public class OnboardStartRequest {
     private String businessName;
     @NotBlank
     private String phoneNumber;
-    @NotBlank
-    private String accessToken;
-    @NotBlank
-    private String appSecret;
+    // TODO - Uncomment and implement validation for access token and app secret
+    // These fields are required for WhatsApp Cloud API integration.
+    // @NotBlank
+    // private String accessToken;
+    // @NotBlank
+    // private String appSecret;
 }

@@ -10,11 +10,12 @@ import com.whatsbot.service.OnboardingService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import jakarta.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.crypto.SecretKey;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +28,10 @@ public class OnboardingServiceImpl implements OnboardingService {
         TenantConfig config = new TenantConfig();
         config.setBusinessName(request.getBusinessName());
         config.setPhoneNumber(request.getPhoneNumber());
-        config.setAccessToken(request.getAccessToken());
-        config.setAppSecret(request.getAppSecret());
+        // config.setAccessToken(request.getAccessToken());
+        // config.setAppSecret(request.getAppSecret());
+        config.setAccessToken("fnwfoewfq2j41v39lvutc76fvibobgnn8"); // Placeholder for access token
+        config.setAppSecret("dnaifan8wafnwffo23fe43futicutitixxu"); // Placeholder for app secret
         TenantConfig saved = tenantConfigRepository.save(config);
 
         OnboardStartResponse response = new OnboardStartResponse();
