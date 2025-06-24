@@ -36,3 +36,13 @@ export interface OnboardVerifyRequest {
 export interface OnboardVerifyResponse {
   verified: boolean;
 }
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+  tenant: string;
+}
+
+export interface LoginResponse {
+  token: string;
+}
