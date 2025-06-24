@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 
+
 @Service
 @RequiredArgsConstructor
 public class OnboardingServiceImpl implements OnboardingService {
@@ -36,22 +37,40 @@ public class OnboardingServiceImpl implements OnboardingService {
 
         OnboardStartResponse response = new OnboardStartResponse();
         response.setTenantId(saved.getId());
-        response.setToken(generateJwt(saved.getId(), saved.getAppSecret()));
+        response.setToken(createJwt(saved.getId(), saved.getAppSecret()));
         return response;
     }
 
     @Override
     public OnboardVerifyResponse verifyPhone(OnboardVerifyRequest request) {
-        OnboardVerifyResponse response = new OnboardVerifyResponse();
-        response.setSuccess(true);
-        return response;
+        return tenantConfigRepository.findById(request.getTenantId())
+            .map(cfg -> {
+                cfg.setPhoneNumberId("verified" + request.getSmsCode());
+                tenantConfigRepository.save(cfg);
+                OnboardVerifyResponse response = new OnboardVerifyResponse();
+                response.setSuccess(true);
+                return response;
+            })
+            .orElseGet(() -> {
+                OnboardVerifyResponse response = new OnboardVerifyResponse();
+                response.setSuccess(false);
+                return response;
+            });
     }
 
-    private String generateJwt(UUID tenantId, String secret) {
-        SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-        return Jwts.builder()
-            .setSubject(tenantId.toString())
-            .signWith(key, SignatureAlgorithm.HS256)
-            .compact();
+    private String createJwt(UUID tenantId, String secret) {
+        String header = Base64.getUrlEncoder().withoutPadding()
+            .encodeToString("{\"alg\":\"HS256\",\"typ\":\"JWT\"}".getBytes(StandardCharsets.UTF_8));
+        String payload = Base64.getUrlEncoder().withoutPadding()
+            .encodeToString(("{\"tenantId\":\"" + tenantId + "\"}").getBytes(StandardCharsets.UTF_8));
+        try {
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+            byte[] sig = mac.doFinal((header + "." + payload).getBytes(StandardCharsets.UTF_8));
+            String signature = Base64.getUrlEncoder().withoutPadding().encodeToString(sig);
+            return header + "." + payload + "." + signature;
+        } catch (NoSuchAlgorithmException | InvalidKeyException e) {
+            throw new IllegalStateException("Cannot generate JWT", e);
+        }
     }
 }

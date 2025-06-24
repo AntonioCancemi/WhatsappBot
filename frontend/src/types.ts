@@ -30,9 +30,9 @@ export interface OnboardStartResponse {
 export interface OnboardVerifyRequest {
   tenantId: string;
   token: string;
-  smsCode: string;
+  code: string;
 }
 
 export interface OnboardVerifyResponse {
-  success: boolean;
+  verified: boolean;
 }
